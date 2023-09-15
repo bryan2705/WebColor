@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabla de Colores por Tono</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #000;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Tabla de Colores por Tono</h1>
+    <table id="colorTable">
+        <tr>
+            <th>Color</th>
+            <th>Código RGB</th>
+        </tr>
+    </table>
+
+    <script>
+        // Función para generar una lista de colores en orden de tono.
+        function generarColores() {
+            let colores = [];
+            for (let r = 0; r <= 255; r += 51) {
+                for (let g = 0; g <= 255; g += 51) {
+                    for (let b = 0; b <= 255; b += 51) {
+                        colores.push(`rgb(${r},${g},${b})`);
+                    }
+                }
+            }
+            return colores;
+        }
+
+        // Obtener la tabla y generar la lista de colores.
+        const colorTable = document.getElementById("colorTable");
+        const listaDeColores = generarColores();
+
+        // Llenar la tabla con los colores y códigos RGB.
+        listaDeColores.forEach((color, index) => {
+            const fila = document.createElement("tr");
+            const celdaColor = document.createElement("td");
+            const celdaCodigo = document.createElement("td");
+
+            celdaColor.style.backgroundColor = color;
+            celdaCodigo.textContent = color;
+
+            fila.appendChild(celdaColor);
+            fila.appendChild(celdaCodigo);
+            colorTable.appendChild(fila);
+        });
+    </script>
+</body>
+</html>
